@@ -1,0 +1,7 @@
+main.c:220:6:SystemClock_Config	72	static
+main.c:109:5:main	144	static
+main.c:569:6:data_transmit	8	static
+main.c:613:6:Servo_go	12	static
+main.c:574:5:receive_data_division	16	static
+main.c:554:6:HAL_UART_RxCpltCallback	8	static
+main.c:671:6:Error_Handler	0	static
