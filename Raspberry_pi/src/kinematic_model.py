@@ -79,6 +79,6 @@ class robotKinematics:
                                  [_bodytofeetBL[0] , _bodytofeetBL[1] , _bodytofeetBL[2]]])
         
         #print(f"FR-->{np.round_(FR_angles*180.0/np.pi,2)}|FL-->{np.round_(FL_angles*180.0/np.pi,2)}|BR-->{np.round_(BR_angles*180.0/np.pi,2)}|BL-->{np.round_(BL_angles*180.0/np.pi,2)}")
-        return FR_angles, FL_angles, BR_angles,BL_angles
+        return FR_angles, FL_angles, BR_angles,BL_angles,self.ik_error
 
         #return f"FR-->{np.round_(FR_angles*180.0/np.pi,5)}, FL-->{np.round_(FL_angles*180.0/np.pi,5)}, BR-->{np.round_(BR_angles*180.0/np.pi,5)}, BL-->{np.round_(BL_angles*180.0/np.pi,5)}"

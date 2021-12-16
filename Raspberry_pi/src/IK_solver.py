@@ -1,4 +1,3 @@
-from cv2 import error
 import numpy
 
 def checkdomain(D,errors):

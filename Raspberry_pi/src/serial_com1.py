@@ -7,6 +7,8 @@ class microcontroller_serial:
     def __init__(self , port,baudrate):
         #ls -l /dev | grep ACM to identify serial port of the Stm
         self.pi = pigpio.pi()     # connected error aperance --> write terminal "sudo pigpiod"
+        if not self.pi.connected:
+            exit()
         self.baudrate = baudrate
         self.port = port
         self.Stm=self.pi.serial_open(self.port,self.baudrate)
@@ -56,10 +58,10 @@ class microcontroller_serial:
                     
         return loopTime , Xacc , Yacc , roll , pitch
             
-    def close(self):
+    def serial_close(self):
         self.pi.serial_close(self.Stm)
 
-    def open(self):
+    def serial_open(self):
         self.Stm=self.pi.serial_open(self.port,self.baudrate)
         time.sleep(1)
 
@@ -69,6 +71,6 @@ if(__name__ == "__main__"):
 
     mylist = [4500,4500,4500,4500,4500,4500,4500,4500,4500,4500,4500,4500]
     uart.serialSend(mylist)
-    uart.close()
+    uart.serial_close()
 
     

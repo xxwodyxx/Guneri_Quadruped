@@ -29,16 +29,12 @@ class MainUiClass(QtWidgets.QMainWindow,quadruped_form.Ui_MainWindow):
         self.threadclass.th_startfunc.connect(self.label_startfunction.setText)
         self.threadclass.th_resetfunc.connect(self.label_resetfunction.setText)
         self.threadclass.th_battery.connect(self.battery_voltage_bar.setValue)
-        self.threadclass.th_exit.connect(self.exit_func)
+        self.threadclass.th_ps3_connect.connect(self.label_ps3connect.setText)
+        self.threadclass.th_serial_connect.connect(self.label_serialconnect.setText)
         self.button_start.clicked.connect(self.button_start_func)
         self.button_stop.clicked.connect(self.button_stop_func)
-        self.threadclass.th_ps3connect(self.ps3_connection.setText)
-        self.threadclass.th_serialconnect(self.serial_connection.setText)
         self.show()
 
-   def exit_func(self,translate__,state):
-      if(state==True):
-         sys.exit()
 
    def button_stop_func(self):
       self.threadclass.terminate()
@@ -66,10 +62,10 @@ class ThreadClass(QtCore.QThread,robot_main):
    th_ikdomain =   QtCore.pyqtSignal(str)
    th_startfunc=   QtCore.pyqtSignal(str)
    th_resetfunc =   QtCore.pyqtSignal(str)
+   th_ps3_connect= QtCore.pyqtSignal(str)
+   th_serial_connect = QtCore.pyqtSignal(str)
    th_battery  =   QtCore.pyqtSignal(int)
-   th_ps3connect= QtCore.pyqtSignal(str)
-   th_serialconnect = QtCore.pyqtSignal(str)
-   th_exit        =QtCore.pyqtSignal(bool)
+
    def __init__(self, parent = None):
       super(ThreadClass,self).__init__(parent)
       self.setup_init()
@@ -94,12 +90,10 @@ class ThreadClass(QtCore.QThread,robot_main):
                            [self.th_ikdomain,str(self.ik__error)],
                            [self.th_startfunc,str(self.startfunc)],
                            [self.th_resetfunc,str(self.resetfunc)],
-                           [self.th_battery, int(self.battery_vol)]
-                           [self.th_ps3connect,str(self.jyconnect)],
-                           [self.th_serialconnect,str(self.stmconect)]
-                           [self.th_exit,bool(self.exit_all)])
-
-
+                           [self.th_battery, int(self.battery_vol)], 
+                           [self.th_ps3_connect,self.jyconnect],
+                           [self.th_serial_connect,self.stmconect])
+            
    def emit_func(self,*args):
       for value in args:
          value[0].emit(value[1])
@@ -110,3 +104,4 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv) 
     MainWindow = MainUiClass()
     sys.exit(app.exec_())
+    

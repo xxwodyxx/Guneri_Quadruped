@@ -31,8 +31,8 @@ class Joystick:
         self.CoM_pos = np.zeros(3)
         self.CoM_orn = np.zeros(3)
         self.calibration = 0
-        print("Gait mode has been activated...")
-        print("\n")
+        self.mode_value = 0
+        self.gait_style_value = 0
 
     def read(self):
         r,w,x = select([self.gamepad.fd], [], [], 0.)
